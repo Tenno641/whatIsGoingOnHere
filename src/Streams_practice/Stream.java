@@ -4,12 +4,19 @@ import java.util.Scanner;
 
 public class Stream {
 
-    public static void main(String []args) {
-        System.out.println("Hello Main");
+    public static void main(String []args) throws Exception {
+        int error = 5 / 0;
 
+        new Thread(() -> {
+            try {Thread.sleep(1000L);} catch (Exception e) {}
+            System.out.println("I'm a zombie thread.");
+        }).start();
 
-        HelloThread1 t1 = new HelloThread1();
-        t1.start();
+        new Thread(() -> {
+            try {Thread.sleep(2000L);} catch (Exception e) {}
+            System.out.println("I'm a zombie thread too.");
+        }).start();
+
     }
 
 }

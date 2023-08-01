@@ -12,12 +12,6 @@ public class Stream {
         t1.start();
     }
 
-    public static void startRunnables(Runnable[] runnables) {
-        for (Runnable s : runnables) {
-            new Thread(s).start();
-        }
-    }
-
 }
 
 class HelloThread1 extends Thread {

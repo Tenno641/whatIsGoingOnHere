@@ -1,6 +1,7 @@
 package Streams_practice;
 
 import java.util.Scanner;
+import java.util.function.Function;
 
 public class Stream {
 
@@ -9,22 +10,63 @@ public class Stream {
         cTest ctest = new cTest();
         ctest.method();
 
-        iTest anny = new iTest() {
+        iTest anonymous = new iTest() {
             @Override
             public void method() {
-                System.out.println("Anny");
+                System.out.println("anonymous");
             }
         };
-        anny.method();
+        anonymous.method();
 
         iTest lambda = () -> System.out.println("lambda");
         lambda.method();
 
+        // -------------------------------------------------------
+
+        Thread thread1 = new Thread(new runnableClass());
+        thread1.start();
+
+        Thread thread2 = new Thread(new threadClass());
+        thread2.start();
+
+        Thread thread3 = new Thread() {
+            @Override
+            public void run() {
+                System.out.println("anonymousThread");
+            }
+        };
+
+        thread3.start();
+
+
+        Thread thread4 = new Thread(() -> {
+            System.out.println("lambdaThread");
+        });
+
+        thread4.start();
 
 
     }
 
 }
+
+class runnableClass implements Runnable {
+
+    @Override
+    public void run() {
+        System.out.println("RunnableClass");
+    }
+}
+
+class threadClass extends Thread {
+
+    @Override
+    public void run() {
+        System.out.println("threadClass");
+    }
+
+}
+
 
 interface iTest {
     void method();

@@ -4,19 +4,37 @@ import java.util.Scanner;
 
 public class Stream {
 
-    public static void main(String []args) throws Exception {
-        int error = 5 / 0;
+    public static void main(String[] args) throws Exception {
 
-        new Thread(() -> {
-            try {Thread.sleep(1000L);} catch (Exception e) {}
-            System.out.println("I'm a zombie thread.");
-        }).start();
+        cTest ctest = new cTest();
+        ctest.method();
 
-        new Thread(() -> {
-            try {Thread.sleep(2000L);} catch (Exception e) {}
-            System.out.println("I'm a zombie thread too.");
-        }).start();
+        iTest anny = new iTest() {
+            @Override
+            public void method() {
+                System.out.println("Anny");
+            }
+        };
+        anny.method();
 
+        iTest lambda = () -> System.out.println("lambda");
+        lambda.method();
+
+
+
+    }
+
+}
+
+interface iTest {
+    void method();
+}
+
+class cTest implements iTest {
+
+    @Override
+    public void method() {
+        System.out.println("Class");
     }
 
 }
@@ -67,6 +85,3 @@ class SquareWorkerThread extends Thread {
         System.out.printf("\n%s finished%n", getName());
     }
 }
-
-
-

@@ -1,7 +1,6 @@
 package Streams_practice;
 
 import java.util.Scanner;
-import java.util.function.Function;
 
 public class Stream {
 

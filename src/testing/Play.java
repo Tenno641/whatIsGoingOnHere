@@ -1,14 +1,20 @@
 package testing;
 
 import java.lang.Exception;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Play {
 
-    public static void main(String[] args) throws Throwable {
+    public static void main(String[] args) {
 
-        myException e = new myException(new RuntimeException("This is an Exception"));
+        Queue<String> queue = new LinkedList<>();
 
-        System.out.println(e.getCause());
+
+         
+
+
 
     }
 

@@ -1,7 +1,6 @@
 package Streams_practice;
 
-import java.util.Scanner;
-import java.util.function.Function;
+import java.util.*;
 
 public class Stream {
 
@@ -44,7 +43,6 @@ public class Stream {
         });
 
         thread4.start();
-
 
     }
 

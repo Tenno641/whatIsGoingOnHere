@@ -1,10 +1,7 @@
 package testing;
 
 import java.lang.Exception;
-import java.util.ArrayDeque;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-import java.util.Deque;
+import java.util.*;
 
 
 public class Play {
@@ -13,43 +10,47 @@ public class Play {
 
         Scanner scanner = new Scanner(System.in);
 
-        String input = scanner.nextLine();
+        int times = Integer.parseInt(scanner.nextLine());
 
-        System.out.println(solve(input));
 
-    }
+        Deque<Integer> stack = new ArrayDeque<>();
+        Deque<Integer> maxStack = new ArrayDeque<>();
+        int max = Integer.MIN_VALUE;
 
-    public static boolean solve(String input) {
 
-        String opening = "({[";
-        String closing = ")}]";
+        while (times-- > 0) {
+            String[] input = scanner.nextLine().split(" ");
 
-        Deque<Character> deque = new ArrayDeque<>();
-
-        for (int i = 0; i < input.length(); i++) {
-
-            char current = input.charAt(i);
-
-            if (opening.contains(String.valueOf(current))) {
-                deque.push(current);
-            } else {
-                try {
-                    char last = deque.pop();
-
-                    if (opening.indexOf(last) != closing.indexOf(current)) {
-                        return false;
+            switch (input[0]) {
+                case "push" -> {
+                    if (Integer.parseInt(input[1]) >= max) {
+                        maxStack.push(Integer.parseInt(input[1]));
+                        max = Integer.parseInt((input[1]));
                     }
-
-                } catch (NoSuchElementException e) {
-                    return false;
+                    stack.push(Integer.parseInt(input[1]));
                 }
 
+                case "max" -> System.out.println(maxStack.peek());
+
+                case "pop" -> {
+                    if (Objects.equals(stack.peek(), maxStack.peek())) {
+                        maxStack.pop();
+                        max = maxStack.peek();
+                    }
+                    stack.pop();
+                }
+
+                default -> System.out.println("fuck it");
+
             }
+
+
+
         }
 
-        return deque.isEmpty();
 
     }
+
 
 }
 

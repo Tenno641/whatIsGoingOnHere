@@ -9,48 +9,34 @@ public class Play {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        Deque<String> stack = new ArrayDeque<>();
+        Deque<String> wordStack = new ArrayDeque<>();
 
-        int times = Integer.parseInt(scanner.nextLine());
+        char[] input = scanner.nextLine().toCharArray();
+        StringBuilder test = new StringBuilder();
 
+        for (char s : input) {
 
-        Deque<Integer> stack = new ArrayDeque<>();
-        Deque<Integer> maxStack = new ArrayDeque<>();
-        int max = Integer.MIN_VALUE;
+            if (Objects.equals(stack.peek(), "<a>") && s == '<') {
+                wordStack.add(test.toString());
+                test = new StringBuilder();
+            }
 
+            test.append(s);
 
-        while (times-- > 0) {
-            String[] input = scanner.nextLine().split(" ");
-
-            switch (input[0]) {
-                case "push" -> {
-                    if (Integer.parseInt(input[1]) >= max) {
-                        maxStack.push(Integer.parseInt(input[1]));
-                        max = Integer.parseInt((input[1]));
-                    }
-                    stack.push(Integer.parseInt(input[1]));
-                }
-
-                case "max" -> System.out.println(maxStack.peek());
-
-                case "pop" -> {
-                    if (Objects.equals(stack.peek(), maxStack.peek())) {
-                        maxStack.pop();
-                        max = maxStack.peek();
-                    }
-                    stack.pop();
-                }
-
-                default -> System.out.println("fuck it");
-
+            if (s == '>') {
+                stack.add(test.toString());
+                test = new StringBuilder();
             }
 
 
 
         }
 
+        stack.forEach(System.out::println);
+        wordStack.forEach(System.out::println);
 
     }
-
 
 }
 

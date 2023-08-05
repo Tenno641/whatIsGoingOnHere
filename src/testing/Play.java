@@ -1,23 +1,20 @@
 package testing;
 
-import java.util.*;
-
+import java.util.Scanner;
+import java.math.BigInteger;
 
 public class Play {
 
     public static void main(String[] args) {
 
-        List<Grades> grades = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
 
-        grades.add(new Grades("Ahmed", 200));
-        grades.add(new Grades("Mohamed", 150));
-        grades.add(new Grades("Ahmed", 150));
-        grades.add(new Grades("Khaled", 350));
-        grades.add(new Grades("Joe", 350));
+        BigInteger a = new BigInteger(scanner.next());
+        BigInteger b = new BigInteger(scanner.next());
+        BigInteger c = new BigInteger(scanner.next());
+        BigInteger d = new BigInteger(scanner.next());
 
-
-        Collections.sort(grades);
-        System.out.println(grades);
+        System.out.println((a.negate()).multiply(b).add(c).subtract(d));
 
     }
 

@@ -9,12 +9,18 @@ public class Play {
 
         Scanner scanner = new Scanner(System.in);
 
-        BigInteger a = new BigInteger(scanner.next());
-        BigInteger b = new BigInteger(scanner.next());
-        BigInteger c = new BigInteger(scanner.next());
-        BigInteger d = new BigInteger(scanner.next());
+        BigInteger num = new BigInteger(scanner.next());
 
-        System.out.println((a.negate()).multiply(b).add(c).subtract(d));
+        System.out.print(factorial(num));
+
+    }
+
+    public static BigInteger factorial(BigInteger num) {
+        if (num.equals(BigInteger.ZERO) || num.equals(BigInteger.ONE)) {
+            return BigInteger.ONE;
+        }
+
+        return num.multiply(factorial(num.subtract(BigInteger.TWO)));
 
     }
 

@@ -46,6 +46,14 @@ public class Stream {
 
     }
 
+    /**
+     * WTF IS GOING ON HEEEEEEEERE.!
+     */
+
+    public static void run() {
+        System.out.println("Hey");
+    }
+
 }
 
 class runnableClass implements Runnable {
@@ -101,6 +109,12 @@ class HelloThread2 extends Thread {
         System.out.println("Hello from Thread-2");
     }
 }
+
+/**
+ *
+ * Testing this shit out.!
+ *
+ */
 
 class SquareWorkerThread extends Thread {
     private final Scanner scanner = new Scanner(System.in);

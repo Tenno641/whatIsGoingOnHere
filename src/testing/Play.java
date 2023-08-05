@@ -1,6 +1,5 @@
 package testing;
 
-import java.lang.Exception;
 import java.util.*;
 
 
@@ -8,47 +7,43 @@ public class Play {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        Deque<String> stack = new ArrayDeque<>();
-        Deque<String> wordStack = new ArrayDeque<>();
+        List<String> lst = new ArrayList<>();
 
-        char[] input = scanner.nextLine().toCharArray();
-        StringBuilder test = new StringBuilder();
+        lst.add("Ahmed");
+        lst.add("Mohamed");
+        lst.add("Ali");
+        lst.add("ahmed");
 
-        for (char s : input) {
+        Collections.sort(lst);
 
-            if (Objects.equals(stack.peek(), "<a>") && s == '<') {
-                wordStack.add(test.toString());
-                test = new StringBuilder();
-            }
-
-            test.append(s);
-
-            if (s == '>') {
-                stack.add(test.toString());
-                test = new StringBuilder();
-            }
-
-
-
-        }
-
-        stack.forEach(System.out::println);
-        wordStack.forEach(System.out::println);
+        System.out.println(lst);
 
     }
 
 }
 
+class Coin implements Comparable<Coin> {
+    private final int nominalValue;    // nominal value
+    private final int mintYear;        // the year the coin was minted
 
-class myException extends Exception{
-
-    public myException(String msg) {
-        super(msg);
+    Coin(int nominalValue, int mintYear) {
+        this.nominalValue = nominalValue;
+        this.mintYear = mintYear;
     }
 
-    public myException(Exception e) {
-        super(e);
+    @Override
+    public int compareTo(Coin other) {
+        return 0;
     }
 
+    // We consider two coins equal if they have the same nominal value
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) return true;
+        if (that == null || getClass() != that.getClass()) return false;
+        Coin coin = (Coin) that;
+        return nominalValue == coin.nominalValue;
+    }
+
+    // getters, setters, hashCode and toString
 }

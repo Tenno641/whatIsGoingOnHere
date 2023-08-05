@@ -7,43 +7,38 @@ public class Play {
 
     public static void main(String[] args) {
 
-        List<String> lst = new ArrayList<>();
+        List<Grades> grades = new ArrayList<>();
 
-        lst.add("Ahmed");
-        lst.add("Mohamed");
-        lst.add("Ali");
-        lst.add("ahmed");
+        grades.add(new Grades("Ahmed", 200));
+        grades.add(new Grades("Mohamed", 150));
+        grades.add(new Grades("Ahmed", 150));
+        grades.add(new Grades("Khaled", 350));
+        grades.add(new Grades("Joe", 350));
 
-        Collections.sort(lst);
 
-        System.out.println(lst);
+        Collections.sort(grades);
+        System.out.println(grades);
 
     }
 
 }
 
-class Coin implements Comparable<Coin> {
-    private final int nominalValue;    // nominal value
-    private final int mintYear;        // the year the coin was minted
+record Grades(String name, int grade) implements Comparable<Grades> {
 
-    Coin(int nominalValue, int mintYear) {
-        this.nominalValue = nominalValue;
-        this.mintYear = mintYear;
+    @Override
+    public String toString() {
+        return String.format("%s %d", name(), grade());
     }
 
     @Override
-    public int compareTo(Coin other) {
-        return 0;
+    public int compareTo(Grades grades) {
+        int grade = Integer.compare(grade(), grades.grade());
+        if (grade == 0) {
+            return String.CASE_INSENSITIVE_ORDER.compare(name(), grades.name());
+        }
+
+        return grade;
+
     }
 
-    // We consider two coins equal if they have the same nominal value
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) return true;
-        if (that == null || getClass() != that.getClass()) return false;
-        Coin coin = (Coin) that;
-        return nominalValue == coin.nominalValue;
-    }
-
-    // getters, setters, hashCode and toString
 }

@@ -10,11 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        School school = SchoolStaticFactory.newInstance("student");
-
-        school.setName("Ahmed");
-        Students students = (Students) school;
-        students.setAge(25);
+        System.out.println(500000 % 60);
 
     }
 
@@ -24,22 +20,15 @@ class SchoolStaticFactory {
 
     public static School newInstance(String type) {
 
-        switch (type) {
-            case "school" -> {
-                return new School();
-            }
+        return switch (type) {
+            case "school" -> new School();
 
-            case "subject" -> {
-                return new Subjects();
-            }
+            case "subject" -> new Subjects();
 
-            case "student" -> {
-                return new Students();
-            }
+            case "student" -> new Students();
 
-        }
-
-        throw  new NoSuchElementException("Not found!");
+            default -> throw new IllegalStateException("Unexpected value: " + type);
+        };
 
     }
 }

@@ -8,14 +8,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-       Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-       String bigNumber = scanner.nextLine();
-       int newScale = scanner.nextInt();
+        String bigNumber = scanner.nextLine();
+        int newScale = scanner.nextInt();
 
-       BigDecimal bigDecimal = new BigDecimal(bigNumber);
+        BigDecimal bigDecimal = new BigDecimal(bigNumber);
 
-       System.out.print(bigDecimal.setScale(newScale, RoundingMode.HALF_DOWN));
+        System.out.print(bigDecimal.setScale(newScale, RoundingMode.HALF_DOWN));
 
     }
 

@@ -7,10 +7,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Crypto encode = new Crypto("will be able to", "encode");
+        StringBuilder res = new StringBuilder();
 
+        int times = 20;
 
-        Crypto decode = new Crypto("Ofwlyzrpss", "decode");
+        while (times-- > 0) {
+            res.append(String.format("%d ", (new Scanner(System.in).nextInt() + 10) % 26));
+        }
+
+        System.out.println(res);
 
     }
 

@@ -18,7 +18,7 @@ public class Crypto {
         StringBuilder result = new StringBuilder();
 
         for (char c : plainText.toCharArray()) {
-            result.append((char) (c + 2));
+            result.append((char) (c + 7));
         }
 
         return result.toString();
@@ -29,7 +29,7 @@ public class Crypto {
         StringBuilder result = new StringBuilder();
 
         for (char c : plainText.toCharArray()) {
-            result.append((char) (c - 2));
+            result.append((char) (c - 7));
         }
 
         return result.toString();

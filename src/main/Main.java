@@ -10,12 +10,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        String bigNumber = scanner.nextLine();
-        int newScale = scanner.nextInt();
-
-        BigDecimal bigDecimal = new BigDecimal(bigNumber);
-
-        System.out.print(bigDecimal.setScale(newScale, RoundingMode.HALF_DOWN));
+        System.out.println(new BigDecimal(scanner.next()).multiply(new BigDecimal(scanner.next())));
 
     }
 

@@ -1,11 +1,5 @@
 package main;
 
-import cryptography.Crypto;
-import patterns.Factory;
-
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-
 public class Main {
 
     public static void main(String[] args) {

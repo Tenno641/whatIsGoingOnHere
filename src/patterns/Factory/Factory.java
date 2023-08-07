@@ -1,6 +1,4 @@
-package patterns;
-
-import java.util.Scanner;
+package patterns.Factory;
 
 public class Factory {
 

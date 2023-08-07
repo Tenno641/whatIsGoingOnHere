@@ -18,17 +18,14 @@ public class Strategy {
 
         context.on();
 
-        int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        String[] arr = {"AshAllen", "Bailey Cox", "Danni Taylor"};
+        // 1 2 3 4 5 6 7 8
 
-        int step = 3;
+        int last = 3;
 
-        Integer[] ints;
-        ArrayList<Integer> person = new ArrayList<>();
-        int size = arr.length;
-        for (int i = 0; i < size; i += step) {
-            person.add(arr[i]);
+        for (int i = arr.length - 1; last > 0; i--, last--) {
+            System.out.println(arr[i]);
         }
-        System.out.println(Arrays.toString(person.toArray(new Integer[0])));
 
     }
 

@@ -1,5 +1,6 @@
 package patterns.Prototype;
 
+import javax.xml.namespace.QName;
 import java.util.Objects;
 
 public class Prototype {
@@ -11,8 +12,19 @@ public class Prototype {
         PigeonPrototype newPigeon = (PigeonPrototype) proto.clone();
         newPigeon.fly();
 
-
     }
+
+}
+
+abstract class Test {
+
+    String name;
+
+    public Test(String name) {
+        this.name = name;
+    }
+
+
 
 }
 

@@ -1,95 +1,86 @@
 package patterns.Factory;
 
+abstract class Table {
+
+    String productID;
+
+    public Table(String ID) {
+        this.productID = ID;
+    }
+
+    String getProductID() {
+        return productID;
+    }
+
+    void attachLegs() {
+        System.out.println("Attaching Legs");
+    }
+
+    void attachTop() {
+        System.out.println("Attaching tabletop");
+    }
+
+}
+
+class officeTable extends Table {
+
+    public officeTable(String ID) {
+        super(ID);
+    }
+
+}
+
+class kitchenTable extends Table {
+
+    public kitchenTable(String ID) {
+        super(ID);
+    }
+
+}
+
+abstract class TableCreator {
+
+    abstract Table createTable(String type);
+
+    Table orderTable(String type) {
+        Table table = createTable(type);
+
+        if (table == null) {
+            System.out.println("Wrong type!");
+            return null;
+        }
+        System.out.println("Making " + table.productID);
+        table.attachLegs();
+        table.attachTop();
+        System.out.println(table.productID + " is done.\n");
+        return table;
+    }
+
+}
+
+class TableStore extends TableCreator {
+
+    @Override
+    Table createTable(String type) {
+        if (type.equals("office")) {
+            return new officeTable("P0-1");
+        } else if (type.equals("kitchen")) {
+            return new kitchenTable("P0-2");
+        } else return null;
+    }
+}
+
 public class Factory {
 
     public static void main(String[] args) {
 
+        TableStore tableStore = new TableStore();
 
+        Table officeTable = tableStore.orderTable("office");
+
+        Table kitchenTable = tableStore.orderTable("kitchen");
 
     }
 
 }
 
-class BirdsFactory {
-
-    static Bird getInstance(String choice) {
-        return switch (choice) {
-            case "Duck" -> new Duck();
-            case "Chicken" -> new Chicken();
-            case "Pigeon" -> new Pigeon();
-            default -> throw new IllegalStateException();
-        };
-    }
-
-}
-
-abstract class Bird{
-
-    abstract void eat();
-
-    abstract void makeSound();
-
-    abstract void makeEggs();
-
-}
-
-class Duck extends Bird {
-
-    String name = "Duck";
-
-    @Override
-    void eat() {
-        System.out.println("Duck eating");
-    }
-
-    @Override
-    void makeEggs() {
-        System.out.println("Golden Egg");
-    }
-
-    @Override
-    void makeSound() {
-        System.out.println("Quack");
-    }
-
-}
-
-class Chicken extends Bird {
-
-    String name = "Chicken";
-
-    @Override
-    void eat() {
-        System.out.println("Chicken eating");
-    }
-
-    @Override
-    void makeEggs() {
-        System.out.println("Silver Egg");
-    }
-
-    @Override
-    void makeSound() {
-        System.out.println("idk.");
-    }
-
-}
-
-class Pigeon extends Bird {
-
-    @Override
-    void eat() {
-        System.out.println("Duck eating");
-    }
-
-    @Override
-    void makeEggs() {
-        System.out.println("Cutie Egg");
-    }
-
-    @Override
-    void makeSound() {
-        System.out.println("CLCKCKCLCKCK");
-    }
-
-}

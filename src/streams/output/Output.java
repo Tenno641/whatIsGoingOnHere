@@ -1,6 +1,7 @@
 package streams.output;
 
 import java.io.*;
+
 import java.util.Arrays;
 
 public class Output {
@@ -29,11 +30,9 @@ public class Output {
         card1.close();
         card2.close();
 
-
         // Byte Streams
 
-
-        OutputStream output = new FileOutputStream(filename, true);
+        FileOutputStream output = new FileOutputStream(filename, true);
 
         byte[] bytes = {65, 66};
 
@@ -43,14 +42,11 @@ public class Output {
 
         output.write(65);
 
-
-
-
         output.close();
 
+        String test = "Ahmed";
 
-
-
+        System.out.println(Arrays.toString(test.getBytes()));
 
     }
 

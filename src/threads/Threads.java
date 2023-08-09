@@ -1,8 +1,8 @@
-package Streams_practice;
+package threads;
 
 import java.util.*;
 
-public class Stream {
+public class Threads {
 
     public static void main(String[] args) throws Exception {
 

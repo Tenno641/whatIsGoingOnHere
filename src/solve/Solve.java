@@ -9,17 +9,23 @@ public class Solve {
         Scanner input = new Scanner(System.in);
         String[] storage = new String[10];
 
-
         while (true) {
 
             String[] commandLine = input.nextLine().split(" ");
 
-            String command = commandLine[0];
-            if (command.equals("exit")) {
-                return;
+            String command, fileName;
+            int fileNumber;
+
+            try {
+                command = commandLine[0];
+                if (command.equals("exit")) {
+                    return;
+                }
+                fileName = commandLine[1].substring(0, 4);
+                fileNumber = Integer.parseInt(commandLine[1].substring(4));
+            } catch (Exception e) {
+                continue;
             }
-            String fileName = commandLine[1].substring(0, 4);
-            int fileNumber = Integer.parseInt(commandLine[1].substring(4));
 
             String fullName = fileName + fileNumber;
             

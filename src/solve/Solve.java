@@ -15,6 +15,9 @@ public class Solve {
             String[] commandLine = input.nextLine().split(" ");
 
             String command = commandLine[0];
+            if (command.equals("exit")) {
+                return;
+            }
             String fileName = commandLine[1].substring(0, 4);
             int fileNumber = Integer.parseInt(commandLine[1].substring(4));
 
@@ -59,10 +62,6 @@ public class Solve {
                         System.out.printf("the file %s not found\n", fullName);
                     }
 
-                }
-
-                case "exit" -> {
-                    return;
                 }
 
             }

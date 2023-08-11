@@ -30,7 +30,7 @@ public class Solve {
             String fullName = fileName + fileNumber;
             
             if (!(fileNumber >= 1 && fileNumber <= 10)) {
-                System.out.printf("Cannot add the file %s\n", fullName);
+                System.out.printf("Cannot add The file %s\n", fullName);
                 continue;
             }
 
@@ -39,23 +39,23 @@ public class Solve {
                 case "add" -> {
 
                     if (storage[fileNumber - 1] != null) {
-                        System.out.printf("Cannot add the file %s\n", fullName);
+                        System.out.printf("Cannot add The file %s\n", fullName);
                         continue;
                     }
 
                     storage[fileNumber - 1] = fullName;
-                    System.out.printf("the file %s added successfully\n", fullName);
+                    System.out.printf("The file %s added successfully\n", fullName);
 
                 }
 
                 case "get" -> {
 
                     if (storage[fileNumber - 1] == null) {
-                        System.out.printf("the file %s not found\n", fullName);
+                        System.out.printf("The file %s not found\n", fullName);
                         continue;
                     }
 
-                    System.out.printf("the file %s was send\n", fullName);
+                    System.out.printf("The file %s was send\n", fullName);
                     storage[fileNumber - 1] = null;
 
                 }
@@ -63,9 +63,9 @@ public class Solve {
                 case "delete" -> {
                     if (storage[fileNumber - 1] != null) {
                         storage[fileNumber - 1] = null;
-                        System.out.printf("the file %s was deleted\n", fullName);
+                        System.out.printf("The file %s was deleted\n", fullName);
                     } else {
-                        System.out.printf("the file %s not found\n", fullName);
+                        System.out.printf("The file %s not found\n", fullName);
                     }
 
                 }

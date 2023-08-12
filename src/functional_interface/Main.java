@@ -21,6 +21,17 @@ public class Main {
         Func<Long, Long> sub = Func2::square;
         System.out.println(sub.operation(3L));
 
+        TernaryIntPredicate ALL_DIFFERENT = tired::operation;
+        System.out.println(ALL_DIFFERENT.test(-1, 2, 5));
+
+    }
+
+}
+
+class tired {
+
+    public static boolean operation(int a, int b, int c) {
+        return (a != b && b != c && a != c);
     }
 
 }
@@ -30,6 +41,11 @@ interface Func<T, R> {
 
     R operation(T val);
 
+}
+
+@FunctionalInterface
+interface TernaryIntPredicate {
+    boolean test(int num1, int num2, int num3);
 }
 
 class Func2 {

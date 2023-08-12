@@ -20,7 +20,7 @@ public class Solve {
                 return;
             }
 
-            if (!(commandLine[1].matches("file[1-9]") || commandLine[1].equals("file10"))) {
+            if (!(commandLine[1].matches("file[1-9]|10"))) {
                 System.out.printf("Cannot add the file %s\n", commandLine[1]);
                 continue;
             }

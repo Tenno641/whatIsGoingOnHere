@@ -6,73 +6,90 @@ public class Threads {
 
     public static void main(String[] args) throws Exception {
 
-        sharedCounter counter = new sharedCounter();
+        // static synchronized shared methods
+        myThread0 thread0 = new myThread0();
+        myThread1 thread1 = new myThread1();
 
-        thread1 thread1 = new thread1(counter);
-        thread2 thread2 = new thread2(counter);
+        // instance synchronized shared methods
+        sharedCounter2 counter = new sharedCounter2();
+        myThread2 thread2 = new myThread2(counter);
+        myThread3 thread3 = new myThread3(counter);
 
+        thread0.start();
         thread1.start();
         thread2.start();
-
-        Thread.sleep(1000);
-
-        System.out.println(counter.getCounter());
-        System.out.println(counter.getDoubleVal());
+        thread3.start();
 
     }
 
 }
 
-class sharedCounter {
+class sharedCounter1 {
 
-    int counter = 0;
-    volatile double doubleVal = 0.0;
+    static int number = 0;
 
-    void increment() {
-        counter++;
+    static synchronized void doSomething() {
+        System.out.println(Thread.currentThread().getName() + " Started");
+        number++;
+        System.out.println(Thread.currentThread().getName() + number);
+        System.out.println(Thread.currentThread().getName() + " Finished");
+
     }
-
-    void setDoubleVal(double val) {
-        this.doubleVal = val;
-    }
-
-    double getDoubleVal() {
-        return doubleVal;
-    }
-
-    int getCounter() {
-        return counter;
-    }
-
 }
 
-class thread1 extends Thread {
+class myThread0 extends Thread {
 
-    sharedCounter counter;
+    @Override
+    public void run() {
+        sharedCounter1.doSomething();
+    }
+}
 
-    thread1(sharedCounter counter) {
+class myThread1 extends Thread {
+
+    @Override
+    public void run() {
+        sharedCounter1.doSomething();
+    }
+}
+
+class sharedCounter2 {
+
+    int number = 0;
+
+    synchronized void doSomething() {
+        System.out.println(Thread.currentThread().getName() + " Started");
+        number++;
+        System.out.println(Thread.currentThread().getName() + number);
+        System.out.println(Thread.currentThread().getName() + " Finished");
+    }
+}
+
+class myThread2 extends Thread {
+
+    sharedCounter2 counter;
+
+    myThread2(sharedCounter2 counter) {
         this.counter = counter;
     }
 
     @Override
     public void run() {
-        counter.increment();
-        counter.setDoubleVal(25.0);
+        counter.doSomething();
     }
 }
 
-class thread2 extends Thread {
+class myThread3 extends Thread {
 
-    sharedCounter counter;
+    sharedCounter2 counter;
 
-    thread2(sharedCounter counter) {
+    myThread3(sharedCounter2 counter) {
         this.counter = counter;
     }
 
     @Override
     public void run() {
-        counter.increment();
-        counter.setDoubleVal(50.0);
+        counter.doSomething();
     }
 }
 

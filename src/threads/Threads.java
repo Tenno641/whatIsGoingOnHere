@@ -6,115 +6,63 @@ public class Threads {
 
     public static void main(String[] args) throws Exception {
 
-        cTest ctest = new cTest();
-        ctest.method();
+        sharedCounter counter = new sharedCounter();
 
-        iTest anonymous = new iTest() {
-            @Override
-            public void method() {
-                System.out.println("anonymous");
-            }
-        };
-        anonymous.method();
+        thread1 thread1 = new thread1(counter);
+        thread2 thread2 = new thread2(counter);
 
-        iTest lambda = () -> System.out.println("lambda");
-        lambda.method();
-
-        // -------------------------------------------------------
-
-        Thread thread1 = new Thread(new runnableClass());
         thread1.start();
-
-        Thread thread2 = new Thread(new threadClass());
+        thread1.join();
         thread2.start();
+        thread2.join();
 
-        Thread thread3 = new Thread() {
-            @Override
-            public void run() {
-                System.out.println("anonymousThread");
-            }
-        };
+        System.out.println(counter.getCounter());
 
-        thread3.start();
-
-
-        Thread thread4 = new Thread(() -> {
-            System.out.println("lambdaThread");
-        });
-
-        thread4.start();
-
-    }
-
-    /**
-     * WTF IS GOING ON HEEEEEEEERE.!
-     */
-
-    public static void run() {
-        System.out.println("Hey");
     }
 
 }
 
-class runnableClass implements Runnable {
+class sharedCounter {
+
+    int counter = 0;
+
+    void increment() {
+        counter++;
+    }
+
+    int getCounter() {
+        return counter;
+    }
+
+}
+
+class thread1 extends Thread {
+
+    sharedCounter counter;
+
+    thread1(sharedCounter counter) {
+        this.counter = counter;
+    }
 
     @Override
     public void run() {
-        System.out.println("RunnableClass");
+        counter.increment();
     }
 }
 
-class threadClass extends Thread {
+class thread2 extends Thread {
+
+    sharedCounter counter;
+
+    thread2(sharedCounter counter) {
+        this.counter = counter;
+    }
 
     @Override
     public void run() {
-        System.out.println("threadClass");
-    }
-
-}
-
-
-interface iTest {
-    void method();
-}
-
-class cTest implements iTest {
-
-    @Override
-    public void method() {
-        System.out.println("Class");
-    }
-
-}
-
-class HelloThread1 extends Thread {
-
-    @Override
-    public void run() {
-        System.out.println("Hello from Thread-1");
-        HelloThread2 t = new HelloThread2();
-        t.start();
+        counter.increment();
     }
 }
-
-class HelloThread2 extends Thread {
-
-    @Override
-    public void run() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println("Hello from Thread-2");
-    }
-}
-
-/**
- *
- * Testing this shit out.!
- *
- */
 
 class SquareWorkerThread extends Thread {
     private final Scanner scanner = new Scanner(System.in);

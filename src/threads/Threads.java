@@ -6,33 +6,38 @@ public class Threads {
 
     public static void main(String[] args) throws Exception {
 
-//        // static synchronized shared methods
-//        myThread0 thread0 = new myThread0();
-//        myThread1 thread1 = new myThread1();
-//
-//        // instance synchronized shared methods
-//        sharedCounter2 counter = new sharedCounter2();
-//        myThread2 thread2 = new myThread2(counter);
-//        myThread3 thread3 = new myThread3(counter);
-//
-//        thread0.start();
-//        thread1.start();
-//        thread2.start();
-//        thread3.start();
-//
-//        System.out.println();
+        // static synchronized shared methods
+        myThread0 thread0 = new myThread0();
+        myThread1 thread1 = new myThread1();
 
+        thread0.start();
+        thread1.start();
+        thread1.join();
+
+        // Object of the shared data
+        sharedCounter2 counter = new sharedCounter2();
+        // instance synchronized shared methods
+        myThread2 thread2 = new myThread2(counter);
+        myThread3 thread3 = new myThread3(counter);
+
+        thread2.start();
+        thread3.start();
+        thread3.join();
+
+        System.out.println();
+
+        // Object of the shared data
         SomeClass someClass = new SomeClass();
-
+        // synchronized instance block (statement)
         testThreadInstance testThreadInstance = new testThreadInstance(someClass);
         testThreadInstance.start();
 
+        // synchronized static blocks (statements)
         testThreadStatic testThreadStatic = new testThreadStatic();
         testThreadStatic testThreadStatic2 = new testThreadStatic();
 
         testThreadStatic.start();
         testThreadStatic2.start();
-
 
     }
 
@@ -85,7 +90,7 @@ class testThreadStatic extends Thread {
     }
 }
 
-
+// ----------------------------------------
 
 class sharedCounter1 {
 
@@ -156,26 +161,3 @@ class myThread3 extends Thread {
     }
 }
 
-class SquareWorkerThread extends Thread {
-    private final Scanner scanner = new Scanner(System.in);
-
-    public SquareWorkerThread(String name) {
-        super(name);
-    }
-
-    @Override
-    public void run() {
-        while (true) {
-            try {
-                int number = Integer.parseInt(scanner.nextLine());
-                if (number == 0) {
-                    break;
-                }
-                System.out.println(number * number);
-            } catch (NumberFormatException e) {
-                System.out.print("");
-            }
-        }
-        System.out.printf("\n%s finished%n", getName());
-    }
-}

@@ -12,11 +12,12 @@ public class Threads {
         thread2 thread2 = new thread2(counter);
 
         thread1.start();
-        thread1.join();
         thread2.start();
-        thread2.join();
+
+        Thread.sleep(1000);
 
         System.out.println(counter.getCounter());
+        System.out.println(counter.getDoubleVal());
 
     }
 
@@ -25,9 +26,18 @@ public class Threads {
 class sharedCounter {
 
     int counter = 0;
+    volatile double doubleVal = 0.0;
 
     void increment() {
         counter++;
+    }
+
+    void setDoubleVal(double val) {
+        this.doubleVal = val;
+    }
+
+    double getDoubleVal() {
+        return doubleVal;
     }
 
     int getCounter() {
@@ -47,6 +57,7 @@ class thread1 extends Thread {
     @Override
     public void run() {
         counter.increment();
+        counter.setDoubleVal(25.0);
     }
 }
 
@@ -61,6 +72,7 @@ class thread2 extends Thread {
     @Override
     public void run() {
         counter.increment();
+        counter.setDoubleVal(50.0);
     }
 }
 

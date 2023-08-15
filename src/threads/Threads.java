@@ -20,8 +20,54 @@ public class Threads {
         thread2.start();
         thread3.start();
 
+        System.out.println();
+
+        SynchronizedCounter sasa = new SynchronizedCounter();
+
+        Worker worker1 = new Worker(sasa);
+        Worker worker2 = new Worker(sasa);
+
+        worker1.start();
+        worker1.join();
+        worker2.start();
+
+
+        worker2.join();
+
+        System.out.println(sasa.getValue());
+
     }
 
+}
+
+class SynchronizedCounter {
+
+    private int count = 0;
+
+    public void increment() {
+        count++;
+    }
+
+    public synchronized int getValue() {
+        return count;
+
+    }
+}
+
+class Worker extends Thread {
+
+    private final SynchronizedCounter counter;
+
+    public Worker(SynchronizedCounter counter) {
+        this.counter = counter;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 10_000_000; i++) {
+            counter.increment();
+        }
+    }
 }
 
 class sharedCounter1 {

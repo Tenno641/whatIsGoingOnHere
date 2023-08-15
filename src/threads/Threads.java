@@ -6,69 +6,86 @@ public class Threads {
 
     public static void main(String[] args) throws Exception {
 
-        // static synchronized shared methods
-        myThread0 thread0 = new myThread0();
-        myThread1 thread1 = new myThread1();
+//        // static synchronized shared methods
+//        myThread0 thread0 = new myThread0();
+//        myThread1 thread1 = new myThread1();
+//
+//        // instance synchronized shared methods
+//        sharedCounter2 counter = new sharedCounter2();
+//        myThread2 thread2 = new myThread2(counter);
+//        myThread3 thread3 = new myThread3(counter);
+//
+//        thread0.start();
+//        thread1.start();
+//        thread2.start();
+//        thread3.start();
+//
+//        System.out.println();
 
-        // instance synchronized shared methods
-        sharedCounter2 counter = new sharedCounter2();
-        myThread2 thread2 = new myThread2(counter);
-        myThread3 thread3 = new myThread3(counter);
+        SomeClass someClass = new SomeClass();
 
-        thread0.start();
-        thread1.start();
-        thread2.start();
-        thread3.start();
+        testThreadInstance testThreadInstance = new testThreadInstance(someClass);
+        testThreadInstance.start();
 
-        System.out.println();
+        testThreadStatic testThreadStatic = new testThreadStatic();
+        testThreadStatic testThreadStatic2 = new testThreadStatic();
 
-        SynchronizedCounter sasa = new SynchronizedCounter();
+        testThreadStatic.start();
+        testThreadStatic2.start();
 
-        Worker worker1 = new Worker(sasa);
-        Worker worker2 = new Worker(sasa);
-
-        worker1.start();
-        worker1.join();
-        worker2.start();
-
-
-        worker2.join();
-
-        System.out.println(sasa.getValue());
 
     }
 
 }
 
-class SynchronizedCounter {
+class SomeClass {
 
-    private int count = 0;
+    public static void staticMethod() {
 
-    public void increment() {
-        count++;
+        // unsynchronized code
+
+        synchronized (SomeClass.class) { // synchronization on the class
+            for (int i = 0; i < 5; i++) {
+                System.out.println("Static" + i);
+            }
+        }
     }
 
-    public synchronized int getValue() {
-        return count;
+    public void instanceMethod() {
 
+        // unsynchronized code
+
+        synchronized (this) { // synchronization on this instance
+            for (int i = 0; i < 5; i++) {
+                System.out.println("Instance" + i);
+            }
+        }
     }
 }
 
-class Worker extends Thread {
+class testThreadInstance extends Thread {
 
-    private final SynchronizedCounter counter;
+    SomeClass someClass;
 
-    public Worker(SynchronizedCounter counter) {
-        this.counter = counter;
+    testThreadInstance(SomeClass someClass) {
+        this.someClass = someClass;
     }
 
     @Override
     public void run() {
-        for (int i = 0; i < 10_000_000; i++) {
-            counter.increment();
-        }
+        someClass.instanceMethod();
     }
 }
+
+class testThreadStatic extends Thread {
+
+    @Override
+    public void run() {
+        SomeClass.staticMethod();
+    }
+}
+
+
 
 class sharedCounter1 {
 

@@ -38,8 +38,73 @@ public class Threads {
 
         testThreadStatic.start();
         testThreadStatic2.start();
+        testThreadStatic2.join();
+
+        SomeClass2 someClass2 = new SomeClass2();
+        testThreadInstance2 testThreadInstance2 = new testThreadInstance2(someClass2);
+        testThreadInstance22 testThreadInstance22 = new testThreadInstance22(someClass2);
+
+        testThreadInstance2.start();
+        testThreadInstance22.start();
 
     }
+
+}
+
+class SomeClass2 {
+
+    private int numberOfCallingMethod1 = 0;
+    private int numberOfCallingMethod2 = 0;
+
+    final Object lock1 = new Object(); // an object for locking
+    final Object lock2 = new Object(); // another object for locking
+
+    public void method1() {
+        System.out.println("method1...");
+
+        synchronized (lock1) {
+            numberOfCallingMethod1++;
+            System.out.println(numberOfCallingMethod1);
+        }
+    }
+
+    public void method2() {
+        System.out.println("method2...");
+
+        synchronized (lock2) {
+            numberOfCallingMethod2++;
+            System.out.println(numberOfCallingMethod2);
+        }
+    }
+}
+
+class testThreadInstance2 extends Thread {
+
+    SomeClass2 someClass;
+
+    testThreadInstance2(SomeClass2 someClass) {
+        this.someClass = someClass;
+    }
+
+    @Override
+    public void run() {
+        someClass.method1();
+    }
+}
+
+class testThreadInstance22 extends Thread {
+
+    SomeClass2 someClass;
+
+    testThreadInstance22(SomeClass2 someClass) {
+        this.someClass = someClass;
+    }
+
+    @Override
+    public void run() {
+        someClass.method2();
+    }
+
 
 }
 

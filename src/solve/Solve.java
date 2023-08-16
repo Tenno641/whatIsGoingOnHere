@@ -1,25 +1,36 @@
 package solve;
 
+import main.Main;
+
 public class Solve {
 
     public static void main(String[] args) {
 
-        int first = Integer.parseInt(args[1]);
-        int second = Integer.parseInt(args[2]);
+        System.out.println(utility.number);
 
-        switch (args[0]) {
-            case "+" -> System.out.print(first + second);
+        utility utility = new utility();
 
-            case "-" -> System.out.print(first - second);
-
-            case "*" -> System.out.print(first * second);
-
-            case "/" -> System.out.print(first / second);
-
-            default -> System.out.print("Unknown operator");
-
-        }
+        utility.inc();
+        utility.inc();
+        utility.inc();
+        utility.inc();
+        System.out.println(utility.get());
 
     }
+
+}
+
+class utility {
+
+    static int number = 2;
+
+    void inc() {
+        number++;
+    }
+
+    int get() {
+        return number;
+    }
+
 
 }

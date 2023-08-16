@@ -1,74 +1,25 @@
 package solve;
 
-import java.util.Scanner;
-
 public class Solve {
 
     public static void main(String[] args) {
 
-        Scanner input = new Scanner(System.in);
-        String[] storage = new String[10];
+        int first = Integer.parseInt(args[1]);
+        int second = Integer.parseInt(args[2]);
 
+        switch (args[0]) {
+            case "+" -> System.out.print(first + second);
 
-        while (true) {
+            case "-" -> System.out.print(first - second);
 
-            String[] commandLine = input.nextLine().split(" ");
+            case "*" -> System.out.print(first * second);
 
-            String command = commandLine[0];
+            case "/" -> System.out.print(first / second);
 
-            if (command.equals("exit")) {
-                return;
-            }
-
-            if (!(commandLine[1].matches("file[1-9]|10"))) {
-                System.out.printf("Cannot add the file %s\n", commandLine[1]);
-                continue;
-            }
-
-            String fileName = commandLine[1].substring(0, 4);
-            int fileNumber = Integer.parseInt(commandLine[1].substring(4));
-
-            String fullName = fileName + fileNumber;
-
-            switch (command) {
-
-                case "add" -> {
-
-                    if (storage[fileNumber - 1] != null) {
-                        System.out.printf("Cannot add the file %s\n", fullName);
-                        continue;
-                    }
-
-                    storage[fileNumber - 1] = fullName;
-                    System.out.printf("The file %s added successfully\n", fullName);
-
-                }
-
-                case "get" -> {
-
-                    if (storage[fileNumber - 1] == null) {
-                        System.out.printf("The file %s not found\n", fullName);
-                        continue;
-                    }
-
-                    System.out.printf("The file %s was sent\n", fullName);
-                    storage[fileNumber - 1] = null;
-
-                }
-
-                case "delete" -> {
-                    if (storage[fileNumber - 1] != null) {
-                        storage[fileNumber - 1] = null;
-                        System.out.printf("The file %s was deleted\n", fullName);
-                    } else {
-                        System.out.printf("The file %s not found\n", fullName);
-                    }
-
-                }
-
-            }
+            default -> System.out.print("Unknown operator");
 
         }
+
     }
 
 }

@@ -16,14 +16,6 @@ public class Main {
 
         System.out.println(map);
 
-        String str = new String("Ahmed");
-
-        System.out.println(str);;
-
-        int[] arr = new int[]{1, 2, 3};
-
-        System.out.println(Arrays.toString(arr));
-
     }
 
 }

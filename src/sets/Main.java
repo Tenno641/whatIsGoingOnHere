@@ -6,11 +6,23 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String str; 
+        Set<Integer> map = new LinkedHashSet<>();
 
-        Set<String> nameSet = new TreeSet<>(Set.of("1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20"));
+        map.add(3);
+        map.add(2);
+        map.add(1);
+        map.add(4);
+        map.add(5);
 
-        nameSet.forEach(System.out::println);
+        System.out.println(map);
+
+        String str = new String("Ahmed");
+
+        System.out.println(str);;
+
+        int[] arr = new int[]{1, 2, 3};
+
+        System.out.println(Arrays.toString(arr));
 
     }
 

@@ -18,7 +18,9 @@ public class Main {
             executor1.submit(() -> {
 
                 System.out.println("Start process");
-                data.inc();
+                synchronized (data) {
+                    data.inc();
+                }
                 System.out.println("It's done\n");
 
             });
@@ -34,9 +36,9 @@ public class Main {
 
 class sharedData {
 
-    int num = 0;
+    private int num = 0;
 
-    public void inc() {
+    public synchronized void inc() {
         num++;
     }
 
@@ -45,6 +47,7 @@ class sharedData {
     }
 
 }
+
 
 class sum implements Runnable {
 

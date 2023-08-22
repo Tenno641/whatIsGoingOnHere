@@ -10,31 +10,33 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        ExecutorService executor1 = Executors.newFixedThreadPool(4);
-        ExecutorService executor2 = Executors.newFixedThreadPool(4);
+        ExecutorService executor1 = Executors.newSingleThreadExecutor();
+        ExecutorService executor2 = Executors.newSingleThreadExecutor();
         sharedData data = new sharedData();
 
         for (int i = 0; i < 10; i++) {
-            executor1.submit(() -> {
-                System.out.println("Start process");
-                data.dec();
-                System.out.println("It's done\n");
-            });
+            synchronized (data) {
+                executor1.submit(() -> {
+                    System.out.println("Start process");
+                    data.dec();
+                    System.out.println("It's done\n");
+                });
+            }
         }
 
         executor1.shutdown();
-        System.out.println(executor1.awaitTermination(60, TimeUnit.MILLISECONDS));
 
         for (int i = 0; i < 10; i++) {
-            executor2.submit(() -> {
-                System.out.println("Start process");
-                data.inc();
-                System.out.println("It's done\n");
-            });
+            synchronized (data) {
+                executor2.submit(() -> {
+                    System.out.println("Start process");
+                    data.inc();
+                    System.out.println("It's done\n");
+                });
+            }
         }
 
         executor2.shutdown();
-        System.out.println(executor1.awaitTermination(60, TimeUnit.MILLISECONDS));
 
         System.out.println(data.num);
 

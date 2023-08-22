@@ -5,25 +5,28 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
-
-        ExecutorService executor1 = Executors.newSingleThreadExecutor();
         sharedData data = new sharedData();
+        ExecutorService executor1;
 
-        for (int i = 0; i < 10; i++) {
+        synchronized (data) {
+            executor1 = Executors.newSingleThreadExecutor();
 
-            executor1.submit(() -> {
+            for (int i = 0; i < 10; i++) {
 
-                System.out.println("Start process");
-                synchronized (data) {
+                executor1.submit(() -> {
+
+                    System.out.println("Start process");
                     data.inc();
-                }
-                System.out.println("It's done\n");
+                    System.out.println("It's done\n");
 
-            });
+                });
+
+            }
         }
 
         executor1.shutdown();
@@ -36,17 +39,19 @@ public class Main {
 
 class sharedData {
 
-    private int num = 0;
+    AtomicInteger num = new AtomicInteger(0);
 
     public synchronized void inc() {
-        num++;
+        num.incrementAndGet();
     }
 
     public int getNum() {
-        return num;
+        return num.get();
     }
 
 }
+
+
 
 
 class sum implements Runnable {

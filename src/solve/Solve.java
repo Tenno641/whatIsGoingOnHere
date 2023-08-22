@@ -1,33 +1,48 @@
 package solve;
 
+import java.util.Random;
+
 public class Solve {
 
-    public static String solve(String[] strs) {
-        StringBuilder res = new StringBuilder();
+    public static int[] sort(int[] arr) {
 
-        for (int i = 0; i < strs.length; i++) {
-            char first = strs[0].charAt(i);
+        int size = arr.length;
 
-            for (int j = 0; j < strs.length - 1; j++) {
-                if (first != strs[j + 1].charAt(i)) {
-                    return res.toString();
+        for (int i = 0; i < size - 1; i++) {
+
+            for (int j = 0; j < size - i - 1; j++) {
+
+                if (arr[j] < arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                 }
-            }
 
-            res.append(first);
+            }
 
         }
 
-        return "";
+        return arr;
 
     }
 
     public static void main(String[] args) {
 
-        String[] arr = {"flower","flow","flight"};
+        Random rand = new Random();
 
-        System.out.print(solve(arr));
+        int range = 100000;
+
+        int[] arr = new int[range];
+
+        for (int i = 0; i < range; i++) {
+            arr[i] = rand.nextInt(range);
+        }
+
+        int[] sortedArr = sort(arr);
+
+        for (int n : sortedArr) {
+            System.out.printf("%d ", n);
+        }
 
     }
-
 }

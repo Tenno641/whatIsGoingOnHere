@@ -1,5 +1,13 @@
 public class Encapsulation {
 
+    public static void main(String[] a) {
+        System.out.println(Pizza.PizzaSalesCounter.deliveredCount);
+    }
+
+}
+
+class Pizza {
+
     private static String cookedCount;
     private boolean isThinCrust;
 
@@ -10,21 +18,17 @@ public class Encapsulation {
 
         PizzaSalesCounter() {
             System.out.println("Static field of enclosing class is "
-                    + Encapsulation.cookedCount);
+                    + Pizza.cookedCount);
             System.out.println("Non-static field of enclosing class is "
-                    + new Encapsulation().isThinCrust);
+                    + new Pizza().isThinCrust);
         }
     }
 
-    Encapsulation() {
+    Pizza() {
         System.out.println("Non private static field of static class is "
-                + Encapsulation.PizzaSalesCounter.deliveredCount);
+                + Pizza.PizzaSalesCounter.deliveredCount);
         System.out.println("Private static field of static class is "
-                + Encapsulation.PizzaSalesCounter.orderedCount);
-    }
-
-    public static void main(String[] a) {
-        System.out.println(PizzaSalesCounter.deliveredCount);
+                + Pizza.PizzaSalesCounter.orderedCount);
     }
 
 }

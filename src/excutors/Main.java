@@ -11,27 +11,42 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
         sharedData data = new sharedData();
-        ExecutorService executor1;
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        ExecutorService executor2 = Executors.newSingleThreadExecutor();
 
-        synchronized (data) {
-            executor1 = Executors.newSingleThreadExecutor();
+        for (int i = 0; i < 10; i++) {
 
-            for (int i = 0; i < 10; i++) {
-
-                executor1.submit(() -> {
-
+            executor2.submit(() -> {
+                try {
                     System.out.println("Start process");
-                    data.inc();
+                    System.out.println(1 / 0);
                     System.out.println("It's done\n");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
 
-                });
-
-            }
         }
 
-        executor1.shutdown();
+        executor2.shutdown();
 
-        System.out.println(data.getNum());
+        for (int i = 0; i < 10 && executor2.awaitTermination(60, TimeUnit.MILLISECONDS); i++) {
+
+            executor.submit(() -> {
+
+                System.out.println("Start process");
+                data.inc();
+                System.out.println("It's done\n");
+
+            });
+
+        }
+
+        executor.shutdown();
+
+        if (executor.awaitTermination(60, TimeUnit.MILLISECONDS) && executor2.awaitTermination(60, TimeUnit.MILLISECONDS)) {
+            System.out.println(data.getNum());
+        }
 
     }
 
@@ -39,14 +54,18 @@ public class Main {
 
 class sharedData {
 
-    AtomicInteger num = new AtomicInteger(0);
+    int num = 0;
 
-    public synchronized void inc() {
-        num.incrementAndGet();
+    public void inc() {
+        num++;
+    }
+
+    public void dec() {
+        num--;
     }
 
     public int getNum() {
-        return num.get();
+        return num;
     }
 
 }

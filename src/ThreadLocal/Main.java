@@ -1,6 +1,7 @@
 package ThreadLocal;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -8,8 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         ThreadLocal<List<String>> threadLocal = ThreadLocal.withInitial(Main::initList);
-        threadLocal.remove();
-        threadLocal.remove();
+        threadLocal.set(Arrays.asList("Ahmed", "Mousa"));
         threadLocal.remove();
         System.out.println(threadLocal.get());
 

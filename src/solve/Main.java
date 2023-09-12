@@ -1,45 +1,37 @@
 package solve;
 
-import java.util.Scanner;
-import java.util.concurrent.*;
-
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        Scanner scanner = new Scanner(System.in);
-        ExecutorService executor = Executors.newSingleThreadExecutor();
 
-        while (scanner.hasNext()) {
-            int number = scanner.nextInt();
-            PrintIfPrimeTask printIfPrimeTask = new PrintIfPrimeTask(number);
-            executor.submit(printIfPrimeTask);
-        }
-        executor.shutdown();
+        TimeZone timeZone = TimeZone.PST;
+        System.out.println(timeZone);
+
+        String timeZone1 = TimeZone.PST.name();
+
 
     }
 }
 
-class PrintIfPrimeTask implements Runnable {
-    private final int number;
+enum TimeZone {
 
-    public PrintIfPrimeTask(int number) {
-        this.number = number;
+    PST("Pacific Standard Time", -8),
+    MST("Mountain Standard Time", -7),
+    CST("Central Standard Time", -6),
+    EST("Eastern Standard Time", -5);
+
+    private final String desc;
+    private final int offset;
+
+    TimeZone(String desc, int offset) {
+        this.desc = desc;
+        this.offset = offset;
     }
 
-    @Override
-    public void run() {
-        if (number < 2) {
-            return;
-        }
-        if (number == 2) {
-            System.out.println(number);
-            return;
-        }
-        for (int i = 2; i < number; i++) {
-            if (number % i == 0) {
-                return;
-            }
-            System.out.println(number);
-        }
+    public String getDesc() {
+        return desc;
+    }
 
+    public int getOffset() {
+        return offset;
     }
 }

@@ -6,10 +6,22 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         Scanner scanner = new Scanner(System.in);
-        String[] line = scanner.nextLine().split(" ");
-        System.out.println(!(line[0].equals(line[1]) || line[0].equals(line[2]) || line[1].equals(line[2])));
+        int size = Integer.parseInt(scanner.nextLine());
+        String[] arr = scanner.nextLine().split(" ");
+
+        int res = 0;
+        for (int i = 0; i < size - 1; i++) {
+            int first = Integer.parseInt(arr[i]);
+            int second = Integer.parseInt(arr[i + 1]);
+            if (first * second > res) {
+                res = first * second;
+            }
+        }
+
+        System.out.print(res);
 
     }
+
 }
 
 enum TimeZone {

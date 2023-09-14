@@ -1,13 +1,13 @@
 package solve;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-        TimeZone timeZone = TimeZone.PST;
-        System.out.println(timeZone);
-
-        String timeZone1 = TimeZone.PST.name();
-
+        Scanner scanner = new Scanner(System.in);
+        String[] line = scanner.nextLine().split(" ");
+        System.out.println(!(line[0].equals(line[1]) || line[0].equals(line[2]) || line[1].equals(line[2])));
 
     }
 }

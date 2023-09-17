@@ -1,49 +1,37 @@
 package solve;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
         Scanner scanner = new Scanner(System.in);
-        int size = Integer.parseInt(scanner.nextLine());
-        String[] arr = scanner.nextLine().split(" ");
 
-        int res = 0;
-        for (int i = 0; i < size - 1; i++) {
-            int first = Integer.parseInt(arr[i]);
-            int second = Integer.parseInt(arr[i + 1]);
-            if (first * second > res) {
-                res = first * second;
-            }
+        Set<String> set = new HashSet<>();
+        int records = Integer.parseInt(scanner.nextLine());
+
+        for (int i = 0; i < records; i++) {
+            String record = scanner.nextLine().toLowerCase();
+            set.add(record);
         }
 
-        System.out.print(res);
+        Set<String> set2 = new HashSet<>();
+        int inputNumber = Integer.parseInt(scanner.nextLine());
+
+        for (int i = 0; i < inputNumber; i++) {
+            String[] inputs = scanner.nextLine().split(" ");
+            Collections.addAll(set2, inputs);
+        }
+
+        set2.forEach(e -> {
+            if (!set.contains(e.toLowerCase())) {
+                System.out.println(e);
+            }
+        });
 
     }
 
-}
-
-enum TimeZone {
-
-    PST("Pacific Standard Time", -8),
-    MST("Mountain Standard Time", -7),
-    CST("Central Standard Time", -6),
-    EST("Eastern Standard Time", -5);
-
-    private final String desc;
-    private final int offset;
-
-    TimeZone(String desc, int offset) {
-        this.desc = desc;
-        this.offset = offset;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public int getOffset() {
-        return offset;
-    }
 }

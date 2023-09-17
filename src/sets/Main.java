@@ -1,6 +1,6 @@
 package sets;
 
-import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.BiFunction;
@@ -24,6 +24,22 @@ public class Main {
         System.out.println(numbers.subSet(2, true, 4, true));
         
 
+
+    }
+
+    public static Set<String> symmetricDifference(Set<String> set1, Set<String> set2) {
+
+        Set<String> union = new HashSet<>();
+        union.addAll(set1);
+        union.addAll(set2);
+
+        Set<String> set = new HashSet<>(set1);
+
+        set.retainAll(set2);
+
+        union.removeAll(set);
+
+        return union;
 
     }
 

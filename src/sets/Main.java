@@ -1,20 +1,29 @@
 package sets;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.function.BiFunction;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Set<Integer> map = new LinkedHashSet<>();
+        TreeSet<Integer> numbers = new TreeSet<>();
 
-        map.add(3);
-        map.add(2);
-        map.add(1);
-        map.add(4);
-        map.add(5);
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
 
-        System.out.println(map);
+        System.out.println(numbers);
+        System.out.println(numbers.headSet(3, true));
+        System.out.println(numbers.tailSet(3, true));
+
+        System.out.println(numbers.subSet(2, true, 4, true));
+        
+
 
     }
 
